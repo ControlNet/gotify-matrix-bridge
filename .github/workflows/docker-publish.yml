@@ -16,10 +16,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
       - name: Extract crate version
         id: version
         run: |
-          VERSION=$(grep -m1 -oP '^version\\s*=\\s*\"\\K[^\"]+' Cargo.toml)
+          VERSION=$(cargo metadata --no-deps --format-version 1 | jq -r '.packages[] | select(.name=="matrix-gotify-bridge") | .version')
           if [ -z "$VERSION" ]; then
             echo "Failed to parse version from Cargo.toml" >&2
             exit 1
