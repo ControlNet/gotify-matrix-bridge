@@ -22,7 +22,7 @@ jobs:
       - name: Extract crate version
         id: version
         run: |
-          VERSION=$(cargo metadata --no-deps --format-version 1 | jq -r '.packages[] | select(.name=="matrix-gotify-bridge") | .version')
+          VERSION=$(cargo metadata --no-deps --format-version 1 | jq -r '.packages[] | select(.name=="gotify-matrix-bridge") | .version')
           if [ -z "$VERSION" ]; then
             echo "Failed to parse version from Cargo.toml" >&2
             exit 1
@@ -34,7 +34,7 @@ jobs:
         env:
           VERSION: ${{ steps.version.outputs.version }}
         run: |
-          TAG_URL="https://hub.docker.com/v2/repositories/controlnet/matrix-gotify-bridge/tags/${VERSION}"
+          TAG_URL="https://hub.docker.com/v2/repositories/controlnet/gotify-matrix-bridge/tags/${VERSION}"
           STATUS=$(curl -s -o /tmp/tag.json -w "%{http_code}" "$TAG_URL")
           if [ "$STATUS" = "200" ]; then
             echo "remote_version=$VERSION" >> "$GITHUB_OUTPUT"
@@ -92,8 +92,8 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
-            controlnet/matrix-gotify-bridge:latest
-            controlnet/matrix-gotify-bridge:${{ needs.check-version.outputs.local-version }}
+            controlnet/gotify-matrix-bridge:latest
+            controlnet/gotify-matrix-bridge:${{ needs.check-version.outputs.local-version }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -102,6 +102,6 @@ jobs:
         with:
           repo_token: ${{ secrets.ADMIN_PAT }}
           automatic_release_tag: v${{ needs.check-version.outputs.local-version }}
-          title: "[${{ needs.check-version.outputs.local-version }}] Matrix-Gotify Bridge Release"
+          title: "[${{ needs.check-version.outputs.local-version }}] gotify-matrix Bridge Release"
           prerelease: false
           draft: true

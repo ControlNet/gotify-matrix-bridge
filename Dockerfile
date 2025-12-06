@@ -34,12 +34,12 @@ RUN --mount=type=cache,target=/usr/local/cargo/registry,id=cargo-registry \
 FROM alpine:3.20
 RUN apk add --no-cache ca-certificates tzdata
 
-COPY --from=builder /src/target/release/matrix-gotify-bridge /usr/local/bin/matrix-gotify-bridge
-COPY --from=builder /src/example.config.yaml /usr/local/share/matrix-gotify-bridge/example.config.yaml
-COPY --from=builder /src/messageTamplate.default.md /usr/local/share/matrix-gotify-bridge/messageTamplate.default.md
+COPY --from=builder /src/target/release/gotify-matrix-bridge /usr/local/bin/gotify-matrix-bridge
+COPY --from=builder /src/example.config.yaml /usr/local/share/gotify-matrix-bridge/example.config.yaml
+COPY --from=builder /src/messageTamplate.default.md /usr/local/share/gotify-matrix-bridge/messageTamplate.default.md
 
 WORKDIR /data
 VOLUME ["/data"]
 
-ENTRYPOINT ["/usr/local/bin/matrix-gotify-bridge"]
+ENTRYPOINT ["/usr/local/bin/gotify-matrix-bridge"]
 CMD ["-c", "config.yaml"]

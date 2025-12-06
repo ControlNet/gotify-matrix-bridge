@@ -1,12 +1,12 @@
-# Matrix-Gotify Bridge
+# gotify-matrix Bridge
 
 <div align="center">
-    <img src="https://img.shields.io/github/stars/ControlNet/matrix-gotify-bridge?style=flat-square">
-    <img src="https://img.shields.io/github/forks/ControlNet/matrix-gotify-bridge?style=flat-square">
-    <a href="https://github.com/ControlNet/matrix-gotify-bridge/issues"><img src="https://img.shields.io/github/issues/ControlNet/matrix-gotify-bridge?style=flat-square"></a>
-    <img src="https://img.shields.io/github/license/ControlNet/matrix-gotify-bridge?style=flat-square">
-    <a href="https://hub.docker.com/r/controlnet/matrix-gotify-bridge">
-        <img src="https://img.shields.io/docker/image-size/controlnet/matrix-gotify-bridge?style=flat-square&logo=docker&label=Docker">
+    <img src="https://img.shields.io/github/stars/ControlNet/gotify-matrix-bridge?style=flat-square">
+    <img src="https://img.shields.io/github/forks/ControlNet/gotify-matrix-bridge?style=flat-square">
+    <a href="https://github.com/ControlNet/gotify-matrix-bridge/issues"><img src="https://img.shields.io/github/issues/ControlNet/gotify-matrix-bridge?style=flat-square"></a>
+    <img src="https://img.shields.io/github/license/ControlNet/gotify-matrix-bridge?style=flat-square">
+    <a href="https://hub.docker.com/r/controlnet/gotify-matrix-bridge">
+        <img src="https://img.shields.io/docker/image-size/controlnet/gotify-matrix-bridge?style=flat-square&logo=docker&label=Docker">
     </a>
 </div>
 
@@ -16,10 +16,10 @@ Bridge bot that forwards Gotify notifications to Matrix rooms. Compared with [On
 ### Docker
 
 ```bash
-docker run -d -v <data-path>:/data --name matrix-gotify-bridge controlnet/matrix-gotify-bridge   # first run writes /data/config.yaml then exits
+docker run -d -v <data-path>:/data --name gotify-matrix-bridge controlnet/gotify-matrix-bridge   # first run writes /data/config.yaml then exits
 ```
 
-You may need `docker restart matrix-gotify-bridge` to apply changes of the config file.
+You may need `docker restart gotify-matrix-bridge` to apply changes of the config file.
 
 ### Native
 

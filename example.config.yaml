@@ -10,7 +10,7 @@ matrix:
   roomID: "!defaultroom:example.com"  # default room (!id or #alias) to send messages to if no stream matches
   encrypted: true
   deviceID: MGBRIDGE
-  storePath: .matrix-gotify-bridge-store  # path to store the matrix sdk sqlite database
+  storePath: .gotify-matrix-bridge-store  # path to store the matrix sdk sqlite database
 
 # Read the template on each message and apply simple placeholder replacements.
 # Defaults to messageTamplate.md when not set.

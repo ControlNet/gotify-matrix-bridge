@@ -8,7 +8,7 @@ debug/
 
 # Local config / state
 config.yaml
-.matrix-gotify-bridge-store/
+.gotify-matrix-bridge-store/
 
 # Matrix sdk sqlite store files (default path contents)
 *.db

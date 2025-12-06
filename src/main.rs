@@ -15,7 +15,7 @@ use std::{fs, path::Path};
 use structopt::StructOpt;
 
 #[derive(StructOpt, Debug)]
-#[structopt(name = "matrix-gotify-bridge", about = "Bridge Gotify notifications into Matrix rooms.")]
+#[structopt(name = "gotify-matrix-bridge", about = "Bridge Gotify notifications into Matrix rooms.")]
 struct Cli {
     /// Path to config.yaml
     #[structopt(short = "c", long = "config", default_value = "config.yaml")]
@@ -42,7 +42,7 @@ async fn main() -> anyhow::Result<()> {
     ensure_template_files(&cfg)?;
     init_logging(&cfg, cli.log_level.as_deref());
 
-    info!("Starting matrix-gotify-bridge");
+    info!("Starting gotify-matrix-bridge");
 
     let template_engine = TemplateEngine::new(cfg.template_path.clone());
     let router = Router::new(cfg.streams.clone(), cfg.matrix_room.clone());

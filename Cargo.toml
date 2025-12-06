@@ -1,5 +1,5 @@
 [package]
-name = "matrix-gotify-bridge"
+name = "gotify-matrix-bridge"
 version = "0.0.1"
 edition = "2021"
 

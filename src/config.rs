@@ -58,7 +58,7 @@ fn default_device_id() -> String {
 }
 
 fn default_store_path() -> PathBuf {
-    PathBuf::from(".matrix-gotify-bridge-store")
+    PathBuf::from(".gotify-matrix-bridge-store")
 }
 
 #[derive(Debug, Clone)]
