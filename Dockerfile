@@ -1,5 +1,7 @@
 FROM rust:1.84-alpine AS builder
 
+ENV RUSTC_WRAPPER=/usr/bin/sccache
+ENV SCCACHE_GHA_ENABLED=true
 RUN apk add --no-cache build-base musl-dev curl tar; \
     set -eux; \
     ARCH="$(uname -m)"; \
@@ -11,10 +13,8 @@ RUN apk add --no-cache build-base musl-dev curl tar; \
     curl -L "https://github.com/mozilla/sccache/releases/download/v0.12.0/sccache-v0.12.0-${SFX}.tar.gz" \
       -o /tmp/sccache.tar.gz; \
     mkdir -p /tmp/sccache && tar -xzf /tmp/sccache.tar.gz -C /tmp/sccache; \
-    install /tmp/sccache/sccache-v0.12.0-${SFX}/sccache /usr/local/bin/sccache; \
+    install /tmp/sccache/sccache-v0.12.0-${SFX}/sccache ${RUSTC_WRAPPER}; \
     rm -rf /tmp/sccache /tmp/sccache.tar.gz
-ENV RUSTC_WRAPPER=/usr/bin/sccache
-ENV SCCACHE_GHA_ENABLED=true
 
 WORKDIR /src
 COPY Cargo.toml Cargo.lock ./
