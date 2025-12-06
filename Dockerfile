@@ -1,7 +1,7 @@
 FROM rust:1.84-alpine AS builder
 
 ENV RUSTC_WRAPPER=/usr/bin/sccache
-ENV SCCACHE_GHA_ENABLED=true
+ENV SCCACHE_GHA_ENABLED=on
 RUN apk add --no-cache build-base musl-dev curl tar; \
     set -eux; \
     ARCH="$(uname -m)"; \
