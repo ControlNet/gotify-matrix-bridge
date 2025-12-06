@@ -23,7 +23,6 @@ COPY example.config.yaml messageTamplate.default.md ./
 
 RUN --mount=type=secret,id=ACTIONS_RESULTS_URL,env=ACTIONS_RESULTS_URL \
     --mount=type=secret,id=ACTIONS_RUNTIME_TOKEN,env=ACTIONS_RUNTIME_TOKEN \
-    --mount=type=secret,id=ACTIONS_CACHE_URL,env=ACTIONS_CACHE_URL \
     cargo build --release && \
     sccache --show-stats || echo "sccache stats unavailable"
 
