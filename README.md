@@ -1,4 +1,4 @@
-# gotify-matrix Bridge
+# Gotify-Matrix Bridge
 
 <div align="center">
     <img src="https://img.shields.io/github/stars/ControlNet/gotify-matrix-bridge?style=flat-square">
@@ -10,7 +10,7 @@
     </a>
 </div>
 
-Bridge bot that forwards Gotify notifications to Matrix rooms. Compared with [Ondolin/gotify-matrix-bot](https://github.com/Ondolin/gotify-matrix-bot),  supports multi-stream routing (map app IDs to one or many rooms), optional per-stream templates, and optional end-to-end encryption.
+Bridge bot that forwards Gotify notifications to Matrix rooms. Compared with [Ondolin/gotify-matrix-bot](https://github.com/Ondolin/gotify-matrix-bot),  it supports multi-stream routing (map app IDs to one or many rooms), optional per-stream templates, and optional end-to-end encryption.
 
 ## Quick start
 ### Docker
