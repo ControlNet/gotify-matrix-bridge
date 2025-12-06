@@ -1,0 +1,32 @@
+gotify:
+  url: https://gotify.example.com
+  apiToken: YOUR_CLIENT_TOKEN
+
+matrix:
+  homeserverURL: https://matrix.example.com
+  matrixDomain: example.com        # optional; derived from homeserver when omitted
+  username: bot
+  token: MATRIX_ACCESS_TOKEN
+  roomID: "!defaultroom:example.com"  # default room (!id or #alias) to send messages to if no stream matches
+  encrypted: true
+  deviceID: MGBRIDGE
+  storePath: .matrix-gotify-bridge-store  # path to store the matrix sdk sqlite database
+
+# Read the template on each message and apply simple placeholder replacements.
+# Defaults to messageTamplate.md when not set.
+templatePath: messageTamplate.md
+
+# Optional per-app routing rules. Each entry can fan-out to multiple rooms.
+streams:
+  - name: personal-notify
+    apps: [1]  # this is the app id, you can find it as https://<gotify_host>/#/messages/<app_id>
+    rooms:
+      - "!personal-notify:example.com"
+  - name: work-notify
+    apps: [2]
+    rooms:
+      - "!work-notify:example.com"
+      - "!alerts:example.com"
+    template: messageTamplate.md  # optional per-stream template override
+
+debug: false

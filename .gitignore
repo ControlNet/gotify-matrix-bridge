@@ -1,0 +1,27 @@
+# Rust build artifacts
+target/
+debug/
+
+# IntelliJ / VSCode etc
+.idea/
+.vscode/
+
+# Local config / state
+config.yaml
+.matrix-gotify-bridge-store/
+
+# Matrix sdk sqlite store files (default path contents)
+*.db
+*.db-shm
+*.db-wal
+
+# docker/oci layers
+*.tar
+
+# Ignore any leftover pixi env folders
+.pixi/
+
+# Backup files
+**/*.rs.bk
+messageTamplate.md
+/data
