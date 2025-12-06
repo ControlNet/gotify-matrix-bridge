@@ -96,9 +96,6 @@ jobs:
             controlnet/matrix-gotify-bridge:${{ needs.check-version.outputs.local-version }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          secret-envs: |
-            ACTIONS_RUNTIME_TOKEN=ACTIONS_RUNTIME_TOKEN
-            ACTIONS_CACHE_URL=ACTIONS_CACHE_URL
 
       - name: Create GitHub release tag
         uses: marvinpinto/action-automatic-releases@latest

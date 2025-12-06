@@ -1,7 +1,9 @@
 FROM rust:1.84-alpine AS builder
 
-ENV RUSTC_WRAPPER=/usr/bin/sccache
-ENV SCCACHE_GHA_ENABLED=on
+ENV RUSTC_WRAPPER=/usr/bin/sccache \
+    SCCACHE_DIR=/sccache \
+    SCCACHE_NO_DAEMON=1
+
 RUN apk add --no-cache build-base musl-dev curl tar; \
     set -eux; \
     ARCH="$(uname -m)"; \
@@ -21,12 +23,13 @@ COPY Cargo.toml Cargo.lock ./
 COPY src ./src
 COPY example.config.yaml messageTamplate.default.md ./
 
-RUN --mount=type=secret,id=ACTIONS_RUNTIME_TOKEN \
-    --mount=type=secret,id=ACTIONS_CACHE_URL \
-    export ACTIONS_RUNTIME_TOKEN=$(cat /run/secrets/ACTIONS_RUNTIME_TOKEN) && \
-    export ACTIONS_CACHE_URL=$(cat /run/secrets/ACTIONS_CACHE_URL) && \
-    cargo build --release && \
-    sccache --show-stats || echo "sccache stats unavailable"
+RUN --mount=type=cache,target=/usr/local/cargo/registry,id=cargo-registry \
+    --mount=type=cache,target=/usr/local/cargo/git,id=cargo-git \
+    --mount=type=cache,target=/src/target,id=cargo-target \
+    --mount=type=cache,target=/sccache,id=sccache,sharing=locked \
+    set -eux; \
+    cargo build --release; \
+    sccache --show-stats || true
 
 FROM alpine:3.20
 RUN apk add --no-cache ca-certificates tzdata
