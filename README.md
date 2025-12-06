@@ -1,4 +1,14 @@
-# Matrix-Gotify Bridge (Rust)
+# Matrix-Gotify Bridge
+
+<div align="center">
+    <img src="https://img.shields.io/github/stars/ControlNet/matrix-gotify-bridge?style=flat-square">
+    <img src="https://img.shields.io/github/forks/ControlNet/matrix-gotify-bridge?style=flat-square">
+    <a href="https://github.com/ControlNet/matrix-gotify-bridge/issues"><img src="https://img.shields.io/github/issues/ControlNet/matrix-gotify-bridge?style=flat-square"></a>
+    <img src="https://img.shields.io/github/license/ControlNet/matrix-gotify-bridge?style=flat-square">
+    <a href="https://hub.docker.com/r/controlnet/matrix-gotify-bridge">
+        <img src="https://img.shields.io/docker/image-size/controlnet/matrix-gotify-bridge?style=flat-square&logo=docker&label=Docker">
+    </a>
+</div>
 
 Bridge bot that forwards Gotify notifications to Matrix rooms. Compared with [Ondolin/gotify-matrix-bot](https://github.com/Ondolin/gotify-matrix-bot),  supports multi-stream routing (map app IDs to one or many rooms), optional per-stream templates, and optional end-to-end encryption.
 
