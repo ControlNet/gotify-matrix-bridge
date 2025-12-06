@@ -1,14 +1,18 @@
-# syntax=docker/dockerfile:1
 FROM rust:1.84-alpine AS builder
 
-RUN apk add --no-cache build-base musl-dev
+RUN apk add --no-cache build-base musl-dev sccache
+ENV RUSTC_WRAPPER=/usr/bin/sccache
+ENV SCCACHE_GHA_ENABLED=true
 
 WORKDIR /src
 COPY Cargo.toml Cargo.lock ./
 COPY src ./src
 COPY example.config.yaml messageTamplate.default.md ./
 
-RUN cargo build --release
+RUN --mount=type=secret,id=ACTIONS_RESULTS_URL,env=ACTIONS_RESULTS_URL \
+    --mount=type=secret,id=ACTIONS_RUNTIME_TOKEN,env=ACTIONS_RUNTIME_TOKEN \
+    cargo build --release && \
+    sccache --show-stats || echo "sccache stats unavailable"
 
 FROM alpine:3.20
 RUN apk add --no-cache ca-certificates tzdata
