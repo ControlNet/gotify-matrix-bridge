@@ -1,6 +1,18 @@
 FROM rust:1.84-alpine AS builder
 
-RUN apk add --no-cache build-base musl-dev sccache
+RUN apk add --no-cache build-base musl-dev curl tar; \
+    set -eux; \
+    ARCH="$(uname -m)"; \
+    case "$ARCH" in \
+      x86_64)  SFX=x86_64-unknown-linux-musl ;; \
+      aarch64) SFX=aarch64-unknown-linux-musl ;; \
+      *) echo "unsupported arch: $ARCH" >&2; exit 1 ;; \
+    esac; \
+    curl -L "https://github.com/mozilla/sccache/releases/download/v0.12.0/sccache-v0.12.0-${SFX}.tar.gz" \
+      -o /tmp/sccache.tar.gz; \
+    mkdir -p /tmp/sccache && tar -xzf /tmp/sccache.tar.gz -C /tmp/sccache; \
+    install /tmp/sccache/sccache-v0.12.0-${SFX}/sccache /usr/local/bin/sccache; \
+    rm -rf /tmp/sccache /tmp/sccache.tar.gz
 ENV RUSTC_WRAPPER=/usr/bin/sccache
 ENV SCCACHE_GHA_ENABLED=true
 
